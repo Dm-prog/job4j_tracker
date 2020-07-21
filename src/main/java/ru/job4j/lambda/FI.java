@@ -23,7 +23,7 @@ public class FI {
         Arrays.sort(atts, comparator);
 
         //Comparator<Student> comparator =
-        //int compare(Student o1, Student o2)
+        //int compare(Student o1, Student o2) - так в этом случае будет выглядеть метод compare
     }
 
     public static void raw(List<Attachment> list, Function<Attachment, InputStream> func) {
@@ -37,7 +37,6 @@ public class FI {
     }
 
     //Function<Student, Mark> func = ...
-    //InputStream apply(Student t) {
-    //        return null;
+    //Student apply(Mark m) { - так в этом случае будет выглядеть метод apply.
     //    }
 }
