@@ -24,6 +24,12 @@ public class FI {
 
         //Comparator<Student> comparator =
         //int compare(Student o1, Student o2) - так в этом случае будет выглядеть метод compare
+        //====================================================================================//
+        Comparator<String> cmpDescSize = (left, right) -> {
+            System.out.println("Compare - " + right.length() + " : " + left.length());
+            return right.length() - left.length();
+        };
+        //====================================================================================//
     }
 
     public static void raw(List<Attachment> list, Function<Attachment, InputStream> func) {
