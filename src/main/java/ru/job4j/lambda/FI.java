@@ -30,6 +30,24 @@ public class FI {
             return right.length() - left.length();
         };
         //====================================================================================//
+        String[] names1 = {
+                "Ivan",
+        };
+        Comparator<String> lengthCmp1 = (left, right) -> {
+            System.out.println("execute comparator");
+            return left.length() - right.length();
+        };
+        Arrays.sort(names1, lengthCmp1);
+
+        String[] names2 = {
+                "Ivan",
+                "Petr"
+        };
+        Comparator<String> lengthCmp2 = (left, right) -> {
+            System.out.println("execute comparator");
+            return left.length() - right.length();
+        };
+        Arrays.sort(names2, lengthCmp2);
     }
 
     public static void raw(List<Attachment> list, Function<Attachment, InputStream> func) {
