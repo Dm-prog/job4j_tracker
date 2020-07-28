@@ -2,6 +2,7 @@ package ru.job4j.lambda;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 import java.util.function.Predicate;
 
 public class SearchAtt {
@@ -44,5 +45,10 @@ public class SearchAtt {
     private static List<Attachment> filterName2(List<Attachment> elements) {
         Predicate<Attachment> predicate = value -> value.getName().contains("bug");
         return filter(elements, predicate);
+    }
+
+    List<Double> diapason(int start, int end, Function<Double, Double> func) {
+
+        return null;
     }
 }
