@@ -46,9 +46,4 @@ public class SearchAtt {
         Predicate<Attachment> predicate = value -> value.getName().contains("bug");
         return filter(elements, predicate);
     }
-
-    List<Double> diapason(int start, int end, Function<Double, Double> func) {
-
-        return null;
-    }
 }
