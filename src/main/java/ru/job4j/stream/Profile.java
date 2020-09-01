@@ -7,7 +7,7 @@ public class Profile {
     private Address address;
 
     List<Address> collect(List<Profile> profiles) {
-        List<Address> result = profiles.stream().map(profile -> profile.address).collect(Collectors.toList());
+        List<Address> result = profiles.stream().map(profile -> profile.address).sorted((o1, o2) -> 1).collect(Collectors.toList());
         return result;
     }
 }
