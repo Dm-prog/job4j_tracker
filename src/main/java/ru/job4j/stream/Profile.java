@@ -5,10 +5,11 @@ import java.util.stream.Collectors;
 
 public class Profile {
     private Address address;
+    private String city;
 
     List<Address> collect(List<Profile> profiles) {
         List<Address> result = profiles.stream()
-                .map(profile -> profile.address).sorted((o1, o2) -> 1)
+                .map(profile -> profile.address).sorted()
                 .distinct().collect(Collectors.toList());
         return result;
     }
