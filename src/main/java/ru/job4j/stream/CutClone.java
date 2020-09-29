@@ -8,13 +8,14 @@ import java.util.stream.Stream;
 
 public class CutClone {
     public static void main(String[] args) {
-        CutClone cutClone = new CutClone();
-        List<Student> students = new ArrayList<>();
-        students.add(new Student("Ivanov", 1));
-        students.add(new Student("Stepanov", 2));
-        students.add(new Student("Petrucho", 3));
-        students.add(new Student("Ivanov", 1));
-        System.out.println(cutClone.sortStudent(students));
+        List<String> names = new ArrayList<>();
+        names.add("Ivan");
+        names.add("Stepan");
+        names.add("Petrucho");
+        names.add("Ivan");
+        names.stream()
+                .distinct()
+                .forEach(System.out::println);
     }
 
     public Map<String, Student> sortStudent(List<Student> studentList) {
