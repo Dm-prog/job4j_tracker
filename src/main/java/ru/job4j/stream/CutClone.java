@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class CutClone {
     public static void main(String[] args) {
@@ -16,15 +15,17 @@ public class CutClone {
         names.stream()
                 .distinct()
                 .forEach(System.out::println);
+
+        List<Student> students = new ArrayList<>();
+        students.add(new Student("Ivanov", 1));
+        students.add(new Student("Petrov", 1));
+        students.add(new Student("Sidorov", 1));
+        students.add(new Student("Ivanov", 1));
+        System.out.println(new CutClone().sortStudent(students));
     }
 
     public Map<String, Student> sortStudent(List<Student> studentList) {
-        Map<String, Student> collect = List.of(
-                studentList.get(0),
-                studentList.get(1),
-                studentList.get(2),
-                studentList.get(3))
-                .stream().distinct().collect(Collectors.toMap(e -> e.getSurname(), e -> e));
-        return collect;
+        return studentList.stream().collect(Collectors.toMap(
+                e -> e.getSurname(), e -> e, (o, o2) -> o));
     }
 }
