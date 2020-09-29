@@ -10,3 +10,4 @@ public class Matrix {
         System.out.println(Stream.of(integers).flatMap(e -> Arrays.stream(e)).collect(Collectors.toList()));
     }
 }
+
