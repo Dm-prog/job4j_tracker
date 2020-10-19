@@ -29,3 +29,4 @@ public class CutClone {
                 e -> e.getSurname(), e -> e, (o, o2) -> o));
     }
 }
+
