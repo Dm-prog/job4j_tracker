@@ -1,27 +1,54 @@
 package ru.job4j.stream;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class EasyStream {
+
+    private final List<Integer> source;
+    private final Function<Integer, Integer> fun;
+
+    public static class Builder {
+
+        List<Integer> source;
+        Function<Integer, Integer> fun;
+
+        public Builder(List<Integer> source) {
+            this.source = source;
+        }
+
+        public Builder(Function<Integer, Integer> fun) {
+            this.fun = fun;
+        }
+
+        private EasyStream build() {
+            return new EasyStream(this);
+        }
+    }
+
     public static EasyStream of(List<Integer> source) {
-        //source = List.of();
-        throw new UnsupportedOperationException();
+        return new EasyStream.Builder(source).build();
     }
 
     public EasyStream map(Function<Integer, Integer> fun) {
 
-        throw new UnsupportedOperationException();
+        return new EasyStream.Builder(fun).build();
+
     }
 
     public EasyStream filter(Predicate<Integer> fun) {
-        throw new UnsupportedOperationException();
+
+        return this;
     }
 
     public List<Integer> collect() {
-        throw new UnsupportedOperationException();
+        return List.of();
+    }
+
+    public EasyStream(Builder builder) {
+        source = builder.source;
+        fun = builder.fun;
     }
 }
