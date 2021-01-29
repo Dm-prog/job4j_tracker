@@ -3,11 +3,16 @@ package ru.job4j.tracker;
 import java.util.Arrays;
 import java.util.Random;
 
-public class Tracker {
+public class Tracker implements Store {
 
     private final Item[] items = new Item[100];
 
     private int position = 0;
+
+    @Override
+    public void init() {
+
+    }
 
     public Item add(Item item) {
         item.setId(generateId());
@@ -76,5 +81,10 @@ public class Tracker {
             System.arraycopy(items, start, items, distPos, size);
         }
         return true;
+    }
+
+    @Override
+    public void close() throws Exception {
+
     }
 }
