@@ -1,6 +1,7 @@
 package ru.job4j.tracker;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 public class Tracker implements Store {
@@ -20,11 +21,11 @@ public class Tracker implements Store {
         return item;
     }
 
-    public Item[] findAll() {
-        return Arrays.copyOf(items, position);
+    public List<Item> findAll() {
+        return Arrays.asList(items);
     }
 
-    public Item[] findByName(String key) {
+    public List<Item> findByName(String key) {
         int size = 0;
         Item[] result = new Item[position];
         for (int index = 0; index < position; index++) {
@@ -34,8 +35,7 @@ public class Tracker implements Store {
                 size++;
             }
         }
-        Arrays.copyOf(result, size);
-        return result;
+        return Arrays.asList(result);
     }
 
     public Item findById(String id) {
@@ -74,17 +74,16 @@ public class Tracker implements Store {
         int index = indexOf(id);
         if (index != -1) {
             int start = index + 1;
-            int distPos = index;
             int size = position - index;
             items[position - 1] = null;
             position--;
-            System.arraycopy(items, start, items, distPos, size);
+            System.arraycopy(items, start, items, index, size);
         }
         return true;
     }
 
     @Override
-    public void close() throws Exception {
+    public void close() {
 
     }
 }

@@ -8,9 +8,9 @@ public class DeleteItem implements UserAction {
     }
 
     @Override
-    public boolean execute(Input input, Tracker tracker) {
+    public boolean execute(Input input, Store store) {
         String id = input.askStr("Enter id: ");
-        if (tracker.delete(id)) {
+        if (store.delete(id)) {
             System.out.println("Deletion was performed successfully");
         } else {
             System.out.print("deletion cannot be performed");

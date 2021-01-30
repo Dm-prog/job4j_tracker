@@ -7,9 +7,9 @@ public class FindByIdAction implements UserAction {
     }
 
     @Override
-    public boolean execute(Input input, Tracker tracker) {
+    public boolean execute(Input input, Store store) {
         String id = input.askStr("question");
-        Item found = tracker.findById(id);
+        Item found = store.findById(id);
         if (found != null) {
             System.out.println(found);
         } else {
