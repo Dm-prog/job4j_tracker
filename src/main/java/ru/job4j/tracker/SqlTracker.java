@@ -26,7 +26,6 @@ public class SqlTracker implements Store {
     }
 
 
-
     @Override
     public void close() throws Exception {
         if (cn != null) {
@@ -102,8 +101,8 @@ public class SqlTracker implements Store {
         try (PreparedStatement statement = cn.prepareStatement("select name from items where name = ?")) {
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
-                    items.add(new Item(resultSet.getString("name")
-                    ));
+                    items.add(new Item(resultSet.getString("name")));
+                    items.add(new Item(resultSet.getString("id")));
                 }
             }
         } catch (Exception e) {
@@ -119,8 +118,8 @@ public class SqlTracker implements Store {
             statement.setString(1, id);
             try (ResultSet resultSet = statement.executeQuery()) {
                 if (resultSet.next()) {
-                    result = new Item(resultSet.getString("id")
-                    );
+                    result = new Item(resultSet.getString("id"));
+                    result = new Item(resultSet.getString("name"));
                 }
             }
         } catch (Exception e) {
