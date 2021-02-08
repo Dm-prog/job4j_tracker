@@ -46,15 +46,6 @@ public class EasyStreamTest {
     }
 
     @Test
-    public void whenMappedFilteredSource() {
-        var rsl = EasyStream.of(List.of(1, 2, 3))
-                .map(e -> e * 2)
-                .filter(e -> e == 2)
-                .collect();
-        assertThat(rsl, is(List.of(4)));
-    }
-
-    @Test
     public void whenMultyFilterSource() {
         var rsl = EasyStream.of(List.of(1, 2, 3, 4, 5))
                 .filter(e -> e >= 2)
