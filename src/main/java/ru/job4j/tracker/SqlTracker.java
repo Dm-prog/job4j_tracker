@@ -49,7 +49,7 @@ public class SqlTracker implements Store {
             statement.execute();
             try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
                 if (generatedKeys.next()) {
-                    item.setId(generatedKeys.getString(1));
+                    item.setId(String.valueOf(generatedKeys.getInt(1)));
                 }
             }
         } catch (SQLException throwables) {
@@ -64,7 +64,7 @@ public class SqlTracker implements Store {
         try (PreparedStatement statement =
                      cn.prepareStatement("update items set name = ? where id = ?")) {
             statement.setString(1, item.getName());
-            statement.setString(2, item.getId());
+            statement.setInt(2, Integer.parseInt(item.getId()));
             result = statement.executeUpdate() > 0;
         } catch (Exception e) {
             e.printStackTrace();
@@ -77,7 +77,7 @@ public class SqlTracker implements Store {
         boolean result = false;
         try (PreparedStatement statement =
                      cn.prepareStatement("delete from items where id = ?")) {
-            statement.setString(1, id);
+            statement.setInt(1, Integer.parseInt(id));
             result = statement.executeUpdate() > 0;
         } catch (Exception e) {
             e.printStackTrace();
@@ -122,7 +122,7 @@ public class SqlTracker implements Store {
     public Item findById(String id) {
         Item result = null;
         try (PreparedStatement statement = cn.prepareStatement("select * from items where id = ?")) {
-            statement.setString(1, id);
+            statement.setInt(1, Integer.parseInt(id));
             try (ResultSet resultSet = statement.executeQuery()) {
                 if (resultSet.next()) {
                     result = new Item(resultSet.getString("id"));
