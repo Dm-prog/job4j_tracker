@@ -64,7 +64,7 @@ public class SqlTracker implements Store {
         try (PreparedStatement statement =
                      cn.prepareStatement("update items set name = ? where id = ?")) {
             statement.setString(1, item.getName());
-            statement.setInt(2, Integer.parseInt(item.getId()));
+            statement.setInt(2, Integer.parseInt(id));
             result = statement.executeUpdate() > 0;
         } catch (Exception e) {
             e.printStackTrace();
@@ -91,7 +91,7 @@ public class SqlTracker implements Store {
         try (PreparedStatement statement = cn.prepareStatement("select * from items")) {
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
-                    items.add(new Item(
+                    items.add(new Item(resultSet.getString("id"),
                             resultSet.getString("name")
                     ));
                 }
@@ -106,10 +106,11 @@ public class SqlTracker implements Store {
     public List<Item> findByName(String key) {
         List<Item> items = new ArrayList<>();
         try (PreparedStatement statement = cn.prepareStatement("select * from items where name = ?")) {
+            statement.setString(1, "text1");
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
-                    items.add(new Item(resultSet.getString("name")));
-                    items.add(new Item(resultSet.getString("id")));
+                    items.add(new Item(resultSet.getString("id"),
+                            resultSet.getString("name")));
                 }
             }
         } catch (Exception e) {
@@ -125,8 +126,8 @@ public class SqlTracker implements Store {
             statement.setInt(1, Integer.parseInt(id));
             try (ResultSet resultSet = statement.executeQuery()) {
                 if (resultSet.next()) {
-                    result = new Item(resultSet.getString("id"));
-                    result = new Item(resultSet.getString("name"));
+                    result = new Item(resultSet.getString("id"),
+                            resultSet.getString("name"));
                 }
             }
         } catch (Exception e) {
