@@ -2,11 +2,11 @@ package ru.job4j.tracker;
 
 public class StartUI {
 
-    public void init(Input input, Tracker tracker, UserAction[] actions) {
+    public void init(Input input, Store tracker, UserAction[] actions) {
         boolean run = true;
         while (run) {
-            this.showMenu(actions);
-            int select = input.askInt("Select: ", 1);
+            showMenu(actions);
+            int select = input.askInt("Enter select: ");
             UserAction action = actions[select];
             run = action.execute(input, tracker);
         }
@@ -14,19 +14,30 @@ public class StartUI {
 
     private void showMenu(UserAction[] actions) {
         System.out.println("Menu.");
-        for (int index = 0; index < actions.length; index++) {
-            System.out.println(index + ". " + actions[index].name());
+        for (int i = 0; i < actions.length; i++) {
+            System.out.printf("%d. %s%n", i, actions[i].name());
         }
     }
 
+
     public static void main(String[] args) {
-        Input input = new ConsoleInput();
-        Input validate = new ValidateInput(input);
-        Tracker tracker = new Tracker();
-        UserAction[] actions = {
-                new CreateAction(), new FindAllAction(), new FindByIdAction(), new FindByNameAction(),
-                new DeleteItem(), new ReplaceItem()
-        };
-        new StartUI().init(validate, tracker, actions);
+        Input validate = new ValidateInput(
+                new ConsoleInput()
+        );
+        try (Store tracker = new SqlTracker()) {
+            tracker.init();
+            UserAction[] actions = {
+                    new CreateAction(),
+                    new ReplaceItem(),
+                    new DeleteItem(),
+                    new FindAllAction(),
+                    new FindByIdAction(),
+                    new FindByNameAction(),
+                    new ExitAction()
+            };
+            new StartUI().init(validate, tracker, actions);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
